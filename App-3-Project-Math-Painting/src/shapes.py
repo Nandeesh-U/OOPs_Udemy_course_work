@@ -9,7 +9,8 @@ class Square:
         self.color = color
 
     def draw(self, canvas):
-        pass
+        # draw the square on the canvas
+        canvas.img_array[self.x:self.x + self.side, self.y:self.y + self.side] = self.color
 
 class Rectangle:
     def __init__(self, x, y, width, height, color):
@@ -20,7 +21,8 @@ class Rectangle:
         self.color = color
 
     def draw(self, canvas):
-        pass
+        # draw the rectangle on the canvas
+        canvas.img_array[self.x:self.x + self.height, self.y:self.y + self.width] = self.color
 
 class Canvas:
     def __init__(self, width, height, color):
@@ -28,9 +30,11 @@ class Canvas:
         self.height = height
         self.color = color
 
+        # create an array of zeros with the specified width and height
+        # and fill it with the specified color
+        self.img_array = np.zeros((self.width, self.height, 3), dtype=np.uint8)
+        self.img_array[:] = self.color
+
     def make(self, imagepath):
-        img_array = np.zeros((self.width, self.height, 3), dtype=np.uint8)
-        img_array[:] = self.color
-        print(img_array)
-        img = Image.fromarray(img_array, 'RGB')
+        img = Image.fromarray(self.img_array, 'RGB')
         img.save(imagepath)
