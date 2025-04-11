@@ -1,6 +1,5 @@
 import webbrowser
 import os
-
 from filestack import Client
 from fpdf import FPDF
 
